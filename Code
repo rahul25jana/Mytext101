@@ -7,7 +7,7 @@ public class TextController : MonoBehaviour
 {
 
 	public Text con;
-	private enum States { dr_st, lft_0, st_0, rt_0, st_1, lft_1, rt_1 }
+	private enum States { dr_st, lft_0, st_0, rt_0, st_1, lft_1, rt_1, nxt }
 	private States mystate;
 
 	// Use this for initialization
@@ -66,6 +66,10 @@ public class TextController : MonoBehaviour
 	
 	{
 	rts_1();
+	} else if(mystate ==States.nxt)
+	
+	{
+	nxts();
 	}
 	
 		           
@@ -175,7 +179,7 @@ public class TextController : MonoBehaviour
 		 
 		}	
 		
-		void std_1 ()
+		void std_1 ()	
 		
 		{
 		con.text = " This is a dead end \n \n" +
@@ -191,16 +195,38 @@ public class TextController : MonoBehaviour
 		void rts_1 ()
 		
 		{
-		 con.text = " Save your husband and run, Don't return " +
-		 		" You did it,  <b><size= 20> Congrats</size></b> " +
-		 		" <b><color=red><size=30> Game Over </size></color></b> ";
-		 			
-		 			  
+		con.text = " Want to save your husband, go here  \n \n " +
+					" Press x to continue" ; 
+		
+		
+	
+				if(Input.GetKeyDown("x")) { mystate = States.nxt;}
+				
 		}
+				
+				
+				void nxts ()
+		{
+				
+		
+		 con.text = " Save your husband and run, Don't return " +
+		 			" You did it,  <b><size= 20> Congrats</size></b> " +
+		 			" <b><color=red><size=30> Game Over </size></color></b> \n \n " +
+		 			" Press n to play again ";
+		 			
+		 			if(Input.GetKeyDown("n"))
+		 			{
+		 			mystate = States.dr_st;
+		 			}
+		 			
+		 			
+		 			
 		
 		
 		
+		}
 		
 	
 	
 }
+
