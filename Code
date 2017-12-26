@@ -1,7 +1,13 @@
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+
+public class TextController : MonoBehaviour 
+
 {
 
 	public Text con;
-	private enum States { dr_st, lft_0, st_0, rt_0, st_1, lft_1, st_2, rt_1 }
+	private enum States { dr_st, lft_0, st_0, rt_0, st_1, lft_1, rt_1 }
 	private States mystate;
 
 	// Use this for initialization
@@ -22,8 +28,8 @@
 	void Update () 
 	{
 	
-		con.text =   "Hello everyone. I am gonna narrate my game story. Is starts with a lady driivng car to save her husband's life from danger. " +
-				     "She drives through an uncharted land, where there might be some dangers along the path. My game is about saving her husband and herself. " +
+		con.text =   "Hello everyone. I am gonna narrate my game story. It starts with a lady driving a car to save her husband's life from danger. " +
+				     "She drives through an uncharted land, where there might see some dangers along the path. My game is about lady saving her husband and herself. " +
 					 "When she drives, there are three roads, left, right and straight. If she chooses left, she will die. If she selects right, " + 
 					 "she may fight to survive. And straight road leads to her husband. This is the first level. Two more to go \n \n" +
 					 "Press d to die, s to survive and  t to try surviving";
@@ -46,7 +52,22 @@
 	{
 		sts();
 	
+	} else if (mystate == States.lft_1)
+	
+	{
+		lft_1();
+	} else if(mystate == States.st_1)
+	
+	{
+	 
+	std_1();
+	
+	} else if(mystate == States.rt_1)
+	
+	{
+	rts_1();
 	}
+	
 		           
 	
 	}
@@ -77,7 +98,7 @@
 				
 				
 	}
-				
+					
 	void lfts ()
 	
 		{
@@ -113,14 +134,73 @@
 	void sts()
 	
 	{
-	con.text = " you are safe for now, next level comes, be prepared ";
+	con.text = " you are safe for now, next level comes, be prepared \n \n  " +
+			   " Press e to continue left, t to go forward, y to escape ";
 	
 		if(Input.GetKeyDown("r"))
 	
 			{
 			mystate = States.dr_st;
+			
+			} else if(Input.GetKeyDown(KeyCode.E))
+			
+			{
+			mystate = States.lft_1;
+			
 			}
+			else if(Input.GetKeyDown(KeyCode.T))
+			
+		{
+			mystate = States.st_1;
+			
+		}	else if(Input.GetKeyDown(KeyCode.Y))
+			
+		{
+			mystate = States.rt_1;
+		} 
 		
 	}
+		
+		
+	void lft_1 ()
+	
+		{
+		 con.text = "This is your freedom, save your life and escape, Forget your husband \n \n " +
+		 			"Press R to go back in one direction ";
+		 
+		 if(Input.GetKeyDown("r"))
+		 {
+		 mystate = States.st_0;
+		 }
+		 
+		}	
+		
+		void std_1 ()
+		
+		{
+		con.text = " This is a dead end \n \n" +
+				    " Press R for U turn";
+				    
+				    if(Input.GetKeyDown("r"))
+				    {
+				    mystate = States.st_0;
+				    }
+				    
+		}
+		
+		void rts_1 ()
+		
+		{
+		 con.text = " Save your husband and run, Don't return " +
+		 		" You did it,  <b><size= 20> Congrats</size></b> " +
+		 		" <b><color=red><size=30> Game Over </size></color></b> ";
+		 			
+		 			  
+		}
+		
+		
+		
+		
+	
 	
 }
