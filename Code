@@ -1,0 +1,80 @@
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+
+public class TextController : MonoBehaviour 
+
+{
+
+	public Text con;
+	private enum States { dr_st, lft_0, st_0, rt_0, st_1, lft_1, st_2rt_1 }
+	private States mystate;
+
+	// Use this for initialization
+	void Start ()
+	
+ 	{
+ 	
+ 	mystate = States.dr_st;
+ 	print("driving");
+	Update(); 	
+ 	
+	//con.text = "This is me, coding";
+	
+   	}
+   	
+	
+	// Update is called once per frame
+	void Update () 
+	{
+		if(mystate == States.dr_st)
+		{
+		drst();
+		} else if (mystate == States.lft_0)
+		
+	{
+		lfts();
+		 
+	}
+	
+	}
+	
+	void drst ()
+	
+	{
+		 con.text =     "Hello everyone. I am gonna narrate my game story. Is starts with a lady driivng car to save her husband's life from danger. " +
+						"She drives through an uncharted land, where there might be some dangers along the path. My game is about saving her husband and herself. " +
+						"When she drives, there are three roads, left, right and straight. If she chooses left, she will die. If she selects right, " + 
+						"she may fight to survive. And straight road leads to her husband. This is the first level. Two more to go \n \n" +
+						"Press d to die, s to survive and  t to try surviving";
+				
+		
+			
+				if(Input.GetKeyDown("d"))
+				
+				{
+				mystate = States.lft_0;
+				}
+				
+	}
+				
+	void lfts ()
+	
+		{
+		
+			con.text = " if you come here, you are dead, return home \n \n " +
+						 "Press r to return ";
+						 
+						 
+			    if(Input.GetKeyDown("r"))
+			    
+			    {
+			    
+			    mystate = States.dr_st;
+			    
+			    }
+						 
+						 	
+	}
+	
+}
