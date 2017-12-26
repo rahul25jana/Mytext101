@@ -1,5 +1,3 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
 public class TextController : MonoBehaviour 
@@ -27,6 +25,13 @@ public class TextController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+	
+		con.text =   "Hello everyone. I am gonna narrate my game story. Is starts with a lady driivng car to save her husband's life from danger. " +
+				     "She drives through an uncharted land, where there might be some dangers along the path. My game is about saving her husband and herself. " +
+					 "When she drives, there are three roads, left, right and straight. If she chooses left, she will die. If she selects right, " + 
+					 "she may fight to survive. And straight road leads to her husband. This is the first level. Two more to go \n \n" +
+					 "Press d to die, s to survive and  t to try surviving";
+		
 		if(mystate == States.dr_st)
 		{
 		drst();
@@ -35,26 +40,45 @@ public class TextController : MonoBehaviour
 	{
 		lfts();
 		 
+	}   else if (mystate == States.rt_0)
+	
+	{
+		rts();
+	
+	} else if (mystate == States.st_0)
+		
+	{
+		sts();
+	
 	}
+		           
 	
 	}
 	
 	void drst ()
 	
 	{
-		 con.text =     "Hello everyone. I am gonna narrate my game story. Is starts with a lady driivng car to save her husband's life from danger. " +
-						"She drives through an uncharted land, where there might be some dangers along the path. My game is about saving her husband and herself. " +
-						"When she drives, there are three roads, left, right and straight. If she chooses left, she will die. If she selects right, " + 
-						"she may fight to survive. And straight road leads to her husband. This is the first level. Two more to go \n \n" +
-						"Press d to die, s to survive and  t to try surviving";
-				
-		
-			
-				if(Input.GetKeyDown("d"))
+	
+	//con.text = " enjoy your day by driving";
+	
+		  if(Input.GetKeyDown("d"))
 				
 				{
 				mystate = States.lft_0;
+				} else if( Input.GetKeyDown("t"))
+				
+				{
+				mystate = States.rt_0;
 				}
+				
+				else if (Input.GetKeyDown("s"))
+				{
+				mystate = States.st_0;
+				
+				}
+				
+				
+				
 				
 	}
 				
@@ -77,4 +101,31 @@ public class TextController : MonoBehaviour
 						 	
 	}
 	
+	void rts()
+	
+	{
+		con.text = " Try to survive here, or die. Best is to return \n \n" +
+					"Press r to return";
+					
+			if(Input.GetKeyDown("r"))
+			{
+			mystate = States.dr_st;
+			}
+	
+	}
+	
+	void sts()
+	
+	{
+	con.text = " you are safe for now, next level comes, be prepared ";
+	
+		if(Input.GetKeyDown("r"))
+	
+			{
+			mystate = States.dr_st;
+			}
+		
+	}
+	
 }
+
