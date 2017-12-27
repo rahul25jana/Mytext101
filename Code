@@ -7,7 +7,7 @@ public class TextController : MonoBehaviour
 {
 
 	public Text con;
-	private enum States { dr_st, lft_0, st_0, rt_0, st_1, lft_1, rt_1, nxt }
+	private enum States { dr_st, lft_0, st_0, rt_0, st_1, lft_1, rt_1, nxt, frn, sear, rm_1, rm_2, kidnap, pol, cli }
 	private States mystate;
 
 	// Use this for initialization
@@ -70,12 +70,39 @@ public class TextController : MonoBehaviour
 	
 	{
 	nxts();
+	
+	} else if(mystate == States.sear)
+	{
+	galon();
+	
+	}else if(mystate == States.frn)
+	
+	{
+	cfrn();
+	
+	}else if(mystate == States.rm_1)
+	{
+	room_1();
+	} else if(mystate == States.rm_2)
+	{
+	room_2();
+	} 
+	
+	else if(mystate == States.kidnap)
+	{
+			kidnap();
+	} else if (mystate == States.cli)
+	{
+	climax();
+	}
+	else if(mystate == States.pol)
+	{
+	police();
 	}
 	
-		           
 	
+		     
 	}
-	
 	void drst ()
 	
 	{
@@ -209,24 +236,135 @@ public class TextController : MonoBehaviour
 		{
 				
 		
-		 con.text = " Save your husband and run, Don't return " +
-		 			" You did it,  <b><size= 20> Congrats</size></b> " +
-		 			" <b><color=red><size=30> Game Over </size></color></b> \n \n " +
-		 			" Press n to play again ";
+		 con.text = " Save your husband and run, Don't return \n \n " +
+		 			" Press n to play level 1, z to go alone and search, c to call frnd";
 		 			
 		 			if(Input.GetKeyDown("n"))
 		 			{
 		 			mystate = States.dr_st;
+		 			} else if (Input.GetKeyDown("z"))
+		 			{
+		 			mystate = States.sear;
+		 			
+		 			} else if (Input.GetKeyDown("c"))
+		 			{
+		 			mystate = States.frn;
 		 			}
+		 }
 		 			
-		 			
-		 			
-		
-		
-		
-		}
-		
+	void galon()
+	{
+	con.text = " try saving him, proceed here or return \n \n " +
+				"Press r to return or h to start searching in room1, v to search in room2, k to see kidnapper" ;
+				if(Input.GetKeyDown("r"))
+				{
+				mystate = States.nxt;
+				} else if(Input.GetKeyDown("h"))
+				{
+				mystate = States.rm_1;
+				} 
+				else if (Input.GetKeyDown("v"))
+				{
+				mystate = States.rm_2;
+				} else if(Input.GetKeyDown("k"))
+				{
+				mystate = States.kidnap;
+				}
+	}
 	
+	void cfrn ()
+	
+	{
+		con.text = " Call your frnd for help \n \n " +
+					"Press r to return or h to start searching in room1, v to search in room2, k to see kidnapper" ;
+			
+		if(Input.GetKeyDown("r"))
+		{
+			mystate = States.nxt;
+		} else if(Input.GetKeyDown("h"))
+		{
+			mystate = States.rm_1;
+		} 
+		else if (Input.GetKeyDown("v"))
+		{
+			mystate = States.rm_2;
+		} else if(Input.GetKeyDown("k"))
+		{
+			mystate = States.kidnap;
+		}
+	
+
+	}  
+	 	 			
+void room_1 ()	
+{
+con.text = " There is nothing in this room \n \n " +
+			" Press r return ";
+			if(Input.GetKeyDown("r"))
+			{
+			mystate = States.sear;
+			}
+}
+void room_2 ()
+{
+con.text = " Your husband is somewhere is this room, search, " +
+			"Find him and escape or go attack the kidnapper \n \n " +
+			" Press space to escape, a to attack the kidnapper ";
+			
+			if(Input.GetKeyDown("space"))
+			{
+			mystate = States.cli;
+			} else if(Input.GetKeyDown("a"))
+			{
+			mystate = States.kidnap;
+			}
+			
+}
+
+void kidnap ()
+{
+
+con.text = " Fight with the kidnapper to save your husband \n \n " +
+			"Press p to call police, press s to continue searching  " ;
+			if(Input.GetKeyDown("p"))
+			{
+			mystate = States.pol;
+			} else if(Input.GetKeyDown("s")) 
+			{
+			mystate = States.rm_2;
+			} 
+			
+}
+			
+
+
+void climax ()
+{
+		con.text = " Finally, you escaped !!\n\n " +	
+			" <color=red><b><size=100>   Congrats </size></b></color> \n \n " +
+				"Press r to play from beginning ";
+		
+		if(Input.GetKeyDown("r"))
+		{
+			mystate = States.dr_st;
+		}
+	}
+
+void police ()
+{
+con.text = " We arrested the criminal. Thank you for your help \n \n " +
+			" Press R for last action " ;
+			
+	if(Input.GetKeyDown(KeyCode.R))
+	{
+	mystate = States.kidnap;
+	} else if(Input.GetKeyDown("r"))
+	{
+	mystate = States.cli;
+	}
 	
 }
+}
+	 				
+		
 
